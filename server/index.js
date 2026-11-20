@@ -30,7 +30,9 @@ function serveStatic(req, res) {
 
 const rooms = new Rooms();
 const server = http.createServer(serveStatic);
-const io = new Server(server);
+// Client đặt ở nơi khác (vd Vercel) thì cần cho phép origin đó: CLIENT_ORIGIN=https://ten-ban.vercel.app (nhiều nơi cách nhau dấu phẩy).
+const ORIGINS = (process.env.CLIENT_ORIGIN || '').split(',').map((o) => o.trim()).filter(Boolean);
+const io = new Server(server, ORIGINS.length ? { cors: { origin: ORIGINS } } : {});
 
 io.on('connection', (socket) => {
   let ctx = null; // { roomId, playerId }

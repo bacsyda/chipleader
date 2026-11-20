@@ -1,6 +1,7 @@
 import { io } from 'socket.io-client';
 
-export const socket = io();
+// Mặc định nối tới chính trang đang mở (server Node phục vụ cả client). Client đặt ở nơi khác (Vercel) thì đặt VITE_SERVER_URL lúc build.
+export const socket = io(import.meta.env.VITE_SERVER_URL || undefined);
 export const call = (event, data = {}) => new Promise((resolve) => socket.emit(event, data, resolve));
 
 export const ERR = {

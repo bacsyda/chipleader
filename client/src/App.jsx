@@ -16,6 +16,13 @@ export default function App() {
   const [view, setView] = useState('table');
   const [toast, setToast] = useState('');
   const [ready, setReady] = useState(false);
+  const [slow, setSlow] = useState(false);   // chờ kết nối lâu: hiện gợi ý thay vì màn hình trống
+
+  useEffect(() => {
+    if (ready) return;
+    const t = setTimeout(() => setSlow(true), 6000);
+    return () => clearTimeout(t);
+  }, [ready]);
 
   useEffect(() => {
     if (!toast) return;
@@ -69,7 +76,14 @@ export default function App() {
     localStorage.removeItem(KEY); setRoom(null); setMe(null);
   };
 
-  if (!ready) return null;
+  if (!ready) {
+    return (
+      <div className="app connecting" role="status">
+        <h2>Đang kết nối máy chủ…</h2>
+        {slow && <p className="mute">Chưa kết nối được. Máy chủ miễn phí có thể đang khởi động (mất khoảng 1 phút), hoặc địa chỉ máy chủ chưa đúng. Trang sẽ tự vào khi kết nối được.</p>}
+      </div>
+    );
+  }
   const inRoom = room && me;
   return (
     <div className="app">
