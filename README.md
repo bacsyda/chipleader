@@ -3,10 +3,6 @@
 Quản lý chip và pot cho nhóm bạn chơi poker ngoài đời. Không có bài, không có luật poker.
 Có hai loại phòng: **Poker** (chip, pot, blind) và **Phỏm** (sổ ghi nợ giữa các người chơi).
 
-## Chạy
-    npm install
-    npm test        # test cho luật chơi, chip thật, Call/Raise, hoạt ảnh và quản lý phòng
-    npm start       # http://localhost:3000 (đọc biến PORT nếu có)
 
 ## Cấu trúc
 - `client/`: giao diện React + Vite. `npm run dev` trong `client/` (kèm `npm start` ở thư mục gốc) để chạy dev.
