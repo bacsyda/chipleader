@@ -1,0 +1,5 @@
+node_modules
+client/dist
+
+# Ghi chú nội bộ cho dev, không đưa lên GitHub
+DEV_NOTES.md
